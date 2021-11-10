@@ -1,11 +1,8 @@
-//redo of first attempt
+let c = document.querySelector("canvas");
+let ctx = c.getContext('2d');
 
-let board = document.querySelector('canvas');
-let ctx = board.getContext('2d');
-
-ctx.fillStyle = "rgb(200, 0, 0)";
-ctx.fillRect(900, 400, 30, 30)
-
+ctx.fillStyle = 'red'
+ctx.fillRect(20, 20, 20, 10)
 
 
 

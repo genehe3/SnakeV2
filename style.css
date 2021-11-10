@@ -1,16 +1,19 @@
 html,
 body {
+    height: 100%;
     margin: 0;
     background: black;
 }
 
 canvas {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 625px;
     height: 625px;
     border: 1px solid red;
     
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
