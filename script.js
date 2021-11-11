@@ -22,6 +22,7 @@ dx = 0; //horizontal "velocity"
 dy = 0; //veritocal "velocity"
 
 let pause = true;
+let frameRate = 15;
 
 let fruit = false;
 let score = 0;
@@ -56,6 +57,7 @@ const randLoc = () => {
 //need 'Game Over' Screen
 const over = () => {
     pause = true;
+    fruit = false;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     score = 0;
     document.getElementById('score').innerHTML = 'Score: 0'
@@ -83,7 +85,6 @@ const draw = (x, y) => {
     if (curPos[0] === fruitPos[0] && curPos[1] === fruitPos[1]) {
         ctx.fillRect(fruitPos[0], fruitPos[1], grid, grid);
         fruitPos = [];
-        randLoc();
         fruit = false;
         Length++;
         score++;
@@ -97,12 +98,14 @@ const draw = (x, y) => {
     if (curPos[0] >= canvas.width && dx === 1) {
         //check for wall, horizontally
         console.log('right');
+        dx = 1;
         curPos[0] = -20;
     }
 
     if (curPos[0] <= 0 && dx === -1) {
         //check for wall, horizontally
         console.log('left');
+        dx = -1;
         curPos[0] = canvas.width;
         
     }
@@ -110,6 +113,7 @@ const draw = (x, y) => {
     if (curPos[1] <= 0 && dy === -1) {
         //check for wall, vertically
         console.log('top');
+        dy = -1;
         curPos[1] = canvas.height;
         
     }
@@ -117,6 +121,7 @@ const draw = (x, y) => {
     if (curPos[1] >= canvas.height && dy === 1) {
         //check for wall, vertically
         console.log('bottom')
+        dy = 1;
         curPos[1] = -20;
     }
 }
@@ -171,6 +176,10 @@ document.addEventListener('keydown', (dir) => {
             dy = 0;
             dx = -1;
             draw(curPos[0], curPos[1])
+        }
+
+        if (keyCode === 'r') {
+            over();
         }
     // switch (keyCode) {
     //     case ' ':
@@ -237,11 +246,15 @@ const moveUpdate = () => {
             draw(curPos[0], curPos[1])
         }
 
+        if (fruit === false) {
+            randLoc()
+        }
+
         document.getElementById('score').innerHTML = `Score: ${score}`
     }
 
 }
-setInterval(moveUpdate, 1000/10); 
+setInterval(moveUpdate, 1000/frameRate); 
 //automatically calls the 'move' function every time the specified timeframe passes.
 
 //need a function to draw in fruit
