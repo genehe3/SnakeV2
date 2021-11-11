@@ -1,19 +1,20 @@
-html,
 body {
-    height: 100%;
-    margin: 0;
-    background: black;
+    background: rgb(161, 70, 70);
 }
 
 canvas {
-    width: 625px;
-    height: 625px;
-    border: 1px solid red;
-    
+    background: rgb(58, 6, 6);
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+h3 {
+    color: white;
 }
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
