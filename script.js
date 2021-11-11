@@ -59,9 +59,9 @@ const over = () => {
     pause = true;
     fruit = false;
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    score = 0;
     document.getElementById('score').innerHTML = 'Score: 0'
     document.getElementById('gameState').innerHTML = `GAME OVER. HIGH SCORE: ${score}. PRESS SPACE TO RESTART.`
+    score = 0;
 }
 //need a way to extract x and y coordinates from bodyPos
 
