@@ -29,13 +29,29 @@ let score = 0;
 
 let fruitPos = [];
 let curPos = [xCenter, yCenter] //starts at the center(snake head)
-let Length = 10; //total length of snake, starts at 3
+let Length = 3; //total length of snake, starts at 3
 
 let bodyPos = []; //position of body
 let bodyX =[];
 let bodyY = [];
 
 let grid = 20; //grid size, also determines how far one step is
+
+//button interaction for setting frames
+const setFrames = () => {
+    //console.log(document.getElementById('frameSet').value);
+    frameRate = document.getElementById('frameSet').value;
+    console.log(frameRate);
+    clearInterval();
+}
+
+const resetFrames = () => {
+    //console.log(document.getElementById('frameSet').value);
+    frameRate = 15;
+    document.getElementById('frameSet').value = frameRate;
+    console.log(frameRate);
+    clearInterval();
+}
 
 //function for touching itself 
 const touched = () => {
@@ -240,6 +256,7 @@ document.addEventListener('keydown', (dir) => {
 //need to automatically move snake when unpaused
 const moveUpdate = () => {
     if (pause === true) {
+        setTimeout(moveUpdate, 1000/frameRate);
         return;
     } else {
         // let i = bodyPos.length;
@@ -280,12 +297,13 @@ const moveUpdate = () => {
         if (touched() === true) {
             over();
         }
-
+        setTimeout(moveUpdate, 1000/frameRate);
         document.getElementById('score').innerHTML = `Score: ${score}`
     }
 
 }
-setInterval(moveUpdate, 1000/frameRate); 
+setTimeout(moveUpdate, 1000/frameRate);
+//setInterval(moveUpdate, 1000/frameRate); 
 //automatically calls the 'move' function every time the specified timeframe passes.
 
 //need a function to draw in fruit

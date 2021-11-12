@@ -12,9 +12,21 @@ h3 {
 
 .left {
     float: left;
+    width: 33.3%;
 }
 
 .right {
     float: right;
 }
+
+.middle {
+    float: left;
+    width: 15.6%;
+}
+
+.textBox {
+    width: auto;
+}
+
+
 
