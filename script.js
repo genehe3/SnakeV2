@@ -29,7 +29,7 @@ let score = 0;
 
 let fruitPos = [];
 let curPos = [xCenter, yCenter] //starts at the center(snake head)
-let Length = 3; //total length of snake, starts at 3
+let Length = 10; //total length of snake, starts at 3
 
 let bodyPos = []; //position of body
 let bodyX =[];
@@ -37,6 +37,16 @@ let bodyY = [];
 
 let grid = 20; //grid size, also determines how far one step is
 
+//function for touching itself 
+const touched = () => {
+    for (let i = bodyPos.length - 8; i > 0; i--){
+        if (bodyPos[i] === curPos[0] && bodyPos[i-1] === curPos[1]) {
+            return true;
+        }
+    } return false;
+}
+
+//function for collision detection with itself, check match with x cord and y cord 
 //moved to top
 const drawFruit = (fruitX, fruitY) => {
     ctx.fillStyle = 'white'
@@ -56,6 +66,7 @@ const randLoc = () => {
 
 //need 'Game Over' Screen
 const over = () => {
+    length = 3;
     pause = true;
     fruit = false;
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -63,8 +74,46 @@ const over = () => {
     document.getElementById('gameState').innerHTML = `GAME OVER. HIGH SCORE: ${score}. PRESS SPACE TO RESTART.`
     score = 0;
 }
-//need a way to extract x and y coordinates from bodyPos
+//functions for moving in order to remove move stacking
+const moveUp = () => {
+    if (dy = -1) {
+        return;
+    } else {
+        curPos[1] = curPos[1] - grid;
+        draw(curPos[0], curPos[1]);
+    }
 
+}
+
+const moveRight = () => {
+    if (dx = 1) {
+        return;
+    } else {
+        curPos[0] = curPos[0] + grid;
+        draw(curPos[0], curPos[1]);
+    }
+
+}
+
+const moveDown = () => {
+    if (dy = 1) {
+        return;
+    } else {
+        curPos[1] = curPos[1] + grid;
+        draw(curPos[0], curPos[1]);
+    }
+
+}
+
+const moveLeft = () => {
+    if (dx = -1) {
+        return;
+    } else {
+        curPos[0] = curPos[0] - grid;
+        draw(curPos[0], curPos[1]);
+    }
+
+}
 
 
 
@@ -82,6 +131,7 @@ const draw = (x, y) => {
         ctx.clearRect(removedX, removedY, grid, grid);
         //clears the oldest rectangle
     }
+    
     if (curPos[0] === fruitPos[0] && curPos[1] === fruitPos[1]) {
         ctx.fillRect(fruitPos[0], fruitPos[1], grid, grid);
         fruitPos = [];
@@ -89,11 +139,6 @@ const draw = (x, y) => {
         Length++;
         score++;
     }
-
-    if (curPos[0] === bodyPos) {
-        over();
-    }
-    
     
     if (curPos[0] >= canvas.width && dx === 1) {
         //check for wall, horizontally
@@ -137,6 +182,7 @@ document.addEventListener('keydown', (dir) => {
         //does nothing if paused, except for unpausing
         if (keyCode === ' ') {
             pause = false;
+            length = 3;
             document.getElementById('gameState').innerHTML = 'Playing.'
             if (fruit === false) {
                 randLoc();
@@ -148,73 +194,46 @@ document.addEventListener('keydown', (dir) => {
         if (keyCode === ' ') {
             pause = true;
             document.getElementById('gameState').innerHTML = 'Paused. Press SPACE to start.';
+            //bodyPos[0] and bodyPos[1] refer to the LAST rect of snake
+            //length - 2 and length - 3 refer to x and y cord of head, respectively
+            //-8,-9 is what I need -- the fourth block
+            // let i = bodyPos.length - 8;
+            // // console.log(i);
+            // // console.log(bodyPos[1]);
+            // // console.log(bodyPos[0]);
+            // ctx.fillStyle = 'pink';
+            // ctx.fillRect(bodyPos[i], bodyPos[i - 1], grid, grid);
+            // ctx.fillRect(bodyPos[i - 2], bodyPos[i - 3], grid, grid);
         }
 
         if (keyCode === 'ArrowUp' && dy !== 1) {
-            curPos[1] = curPos[1] - grid;
+            moveUp();
             dy = -1;
             dx = 0;
-            draw(curPos[0], curPos[1])
         }
 
         if (keyCode === 'ArrowRight' && dx !== -1) {
-            curPos[0] = curPos[0] + grid;
+            moveRight();
             dy = 0;
             dx = 1;
-            draw(curPos[0], curPos[1])
         }
 
         if (keyCode === 'ArrowDown' && dy !== -1) {
-            curPos[1] = curPos[1] + grid;
+            moveDown();
             dy = 1;
             dx = 0;
-            draw(curPos[0], curPos[1])
         }
 
         if (keyCode === 'ArrowLeft' && dx !== 1) {
-            curPos[0] = curPos[0] - grid;
+            moveLeft();
             dy = 0;
             dx = -1;
-            draw(curPos[0], curPos[1])
         }
 
         if (keyCode === 'r') {
             over();
         }
-    // switch (keyCode) {
-    //     case ' ':
-    //         pause = true;
-    //         document.getElementById('gameState').innerHTML = 'Paused. Press SPACE to start.'
-    //         break;
-    //     case 'ArrowUp':
-    //         //takes y coordinate, moves one "grid" and draws it there
-    //         curPos[1] = curPos[1] - grid;
-    //         dy = -1;
-    //         dx = 0;
-    //         draw(curPos[0], curPos[1])
-    //         break;
-        
-    //     case 'ArrowRight':
-    //         curPos[0] = curPos[0] + grid;
-    //         dx = 1;
-    //         dy = 0;
-    //         draw(curPos[0], curPos[1])
-    //         break;
 
-    //     case 'ArrowDown':
-    //         curPos[1] = curPos[1] + grid;
-    //         dy = 1;
-    //         dx = 0;
-    //         draw(curPos[0], curPos[1])
-    //         break;
-
-    //     case 'ArrowLeft':
-    //         curPos[0] = curPos[0] - grid;
-    //         dx = -1;
-    //         dy = 0;
-    //         draw(curPos[0], curPos[1])
-    //         break;
-    // }
 }
 })//working
 
@@ -223,6 +242,14 @@ const moveUpdate = () => {
     if (pause === true) {
         return;
     } else {
+        // let i = bodyPos.length;
+        // // ctx.fillStyle = 'pink';
+        // // ctx.fillRect(bodyPos[i - 8], bodyPos[i-9], grid, grid);
+        // // console.log(bodyPos[i]);
+        // // console.log(bodyPos[i-1])
+        // // console.log(curPos[0])
+        // // console.log(curPos[1])
+        // console.log(touched());
         if (dy === -1) {
             //moving UP
             curPos[1] = curPos[1] - grid;
@@ -248,6 +275,10 @@ const moveUpdate = () => {
 
         if (fruit === false) {
             randLoc()
+        }
+
+        if (touched() === true) {
+            over();
         }
 
         document.getElementById('score').innerHTML = `Score: ${score}`
