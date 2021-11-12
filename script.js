@@ -53,6 +53,8 @@ const resetFrames = () => {
     clearInterval();
 }
 
+window.onload = resetFrames();
+
 //function for touching itself 
 const touched = () => {
     for (let i = bodyPos.length - 8; i > 0; i--){
