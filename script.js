@@ -140,7 +140,7 @@ const draw = (x, y) => {
     ctx.fillStyle = 'red' //colors it red
     bodyPos.push(x, y); //adds two more data points, or xy coordinate pairs, to the position tracker, starting at three pairs max 
     ctx.fillRect(x, y, grid, grid);
-    if (bodyPos.length > Length * 2) {
+    if (bodyPos.length > length * 2) {
         //checks for current length, starting at 3 pairs(6 data points), starts to remove the oldest points after that cutoff
         let removedX = bodyPos.shift();
         //removes the FIRST element of the position tracker array, an X value
@@ -154,7 +154,7 @@ const draw = (x, y) => {
         ctx.fillRect(fruitPos[0], fruitPos[1], grid, grid);
         fruitPos = [];
         fruit = false;
-        Length++;
+        length++;
         score++;
     }
     
