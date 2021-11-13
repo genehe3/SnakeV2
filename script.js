@@ -249,6 +249,7 @@ document.addEventListener('keydown', (dir) => {
         }
 
         if (keyCode === 'r') {
+            length = 3;
             over();
         }
 
