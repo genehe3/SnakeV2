@@ -6,4 +6,5 @@ This attempt I followed along with a guide, trying to develop my own code for th
 Surprisingly, I only needed a little bit of assistance with getting started with the project and add the finishing touches, such as a hit collsion system for the snake and its body.
 90% of the code for this project is original and I have learned even more through the second attempt of this snake game.
 Guide I referred to: https://thoughtbot.com/blog/html5-canvas-snake-game
+
 website for my game: https://gsnakev2.netlify.app/ 
