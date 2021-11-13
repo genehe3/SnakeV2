@@ -29,7 +29,7 @@ let score = 0;
 
 let fruitPos = [];
 let curPos = [xCenter, yCenter] //starts at the center(snake head)
-let Length = 3; //total length of snake, starts at 3
+let length = 3; //total length of snake, starts at 3
 
 let bodyPos = []; //position of body
 let bodyX =[];
