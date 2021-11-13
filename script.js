@@ -84,13 +84,14 @@ const randLoc = () => {
 
 //need 'Game Over' Screen
 const over = () => {
-    length = 3;
     pause = true;
+    bodyPos = [];
     fruit = false;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     document.getElementById('score').innerHTML = 'Score: 0'
     document.getElementById('gameState').innerHTML = `GAME OVER. HIGH SCORE: ${score}. PRESS SPACE TO RESTART.`
     score = 0;
+    length = 3;
 }
 //functions for moving in order to remove move stacking
 const moveUp = () => {
