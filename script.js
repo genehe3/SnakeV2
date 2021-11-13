@@ -201,7 +201,7 @@ document.addEventListener('keydown', (dir) => {
         if (keyCode === ' ') {
             pause = false;
             length = 3;
-            document.getElementById('gameState').innerHTML = 'Playing. Press SPACE to pause. Press r to end current game.'
+            document.getElementById('gameState').innerHTML = 'Playing. Press SPACE to pause. Press R to end current game.'
             if (fruit === false) {
                 randLoc();
             }
@@ -211,7 +211,7 @@ document.addEventListener('keydown', (dir) => {
     } else {
         if (keyCode === ' ') {
             pause = true;
-            document.getElementById('gameState').innerHTML = 'Paused. Press SPACE to start.';
+            document.getElementById('gameState').innerHTML = 'Paused. Press SPACE to resume.';
             //bodyPos[0] and bodyPos[1] refer to the LAST rect of snake
             //length - 2 and length - 3 refer to x and y cord of head, respectively
             //-8,-9 is what I need -- the fourth block
