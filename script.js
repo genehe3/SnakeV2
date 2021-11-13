@@ -201,7 +201,7 @@ document.addEventListener('keydown', (dir) => {
         if (keyCode === ' ') {
             pause = false;
             length = 3;
-            document.getElementById('gameState').innerHTML = 'Playing.'
+            document.getElementById('gameState').innerHTML = 'Playing. Press SPACE to pause. Press r to end current game.'
             if (fruit === false) {
                 randLoc();
             }
